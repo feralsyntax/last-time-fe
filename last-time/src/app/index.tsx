@@ -2,24 +2,6 @@ import { Pressable, Text, View } from "react-native";
 import { styles } from "../../styles/home.styles";
 import { router } from "expo-router";
 
-const items = [
-  {
-    id: "1",
-    title: "Changed car oil",
-    daysAgo: 12,
-  },
-  {
-    id: "2",
-    title: "Went to the dentist",
-    daysAgo: 3,
-  },
-  {
-    id: "3",
-    title: "Had a haircut",
-    daysAgo: 7,
-  },
-];
-
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
