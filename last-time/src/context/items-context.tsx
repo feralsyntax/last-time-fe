@@ -1,4 +1,5 @@
-import {createContext, PropsWithChildren, useContext, useState} from "react";
+import {createContext, PropsWithChildren, useContext, useState, useEffect} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export type Item = {
     id: string;
@@ -11,10 +12,26 @@ type ItemsContextType = {
     addItem: (title: string) => void;
 }
 
+const STORAGE_KEY = "@last-time/items";
+
 const ItemsContext = createContext<ItemsContextType | undefined>(undefined);
 
 export function ItemsProvider({children}: PropsWithChildren) {
     const [items, setItems] = useState<Item[]>([]);
+
+    useEffect(() => {
+        async function loadItems() {
+            const storedItems = await AsyncStorage.getItem(STORAGE_KEY);
+            if (storedItems) {
+                setItems(JSON.parse(storedItems));
+            }
+        }
+        loadItems();
+    }, []);
+
+    useEffect(() => {
+        AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(items))
+    }, [items]);
 
     function addItem(title: string) {
         const newItem: Item = {
