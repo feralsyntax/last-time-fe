@@ -1,26 +1,44 @@
 import { Pressable, Text, View } from "react-native";
 import { styles } from "../../styles/home.styles";
 import { router } from "expo-router";
+import { useItems } from "@/context/items-context";
+
+function getDaysAgo(date: string) {
+  const now = new Date();
+  const lastDoneDate = new Date(date);
+  const difference = now.getTime() - lastDoneDate.getTime();
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  return days;
+}
 
 export default function HomeScreen() {
+  const { items } = useItems();
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Last Time</Text>
         <Text style={styles.subtitle}>
-          Remember when you last did something
+          Keep track of when things last happened.
         </Text>
       </View>
 
       <View style={styles.list}>
-        {items.map((item) => (
-          <Pressable key={item.id} style={styles.card}>
-            <Text style={styles.cardTitle}>{item.title}</Text>
-            <Text style={styles.cardDate}>
-              {item.daysAgo === 1 ? "1 day ago" : `${item.daysAgo} days ago`}
-            </Text>
-          </Pressable>
-        ))}
+        {items.map((item) => {
+          const daysAgo = getDaysAgo(item.lastDone);
+          return (
+            <Pressable key={item.id} style={styles.card}>
+              <Text style={styles.cardTitle}>{item.title}</Text>
+              <Text style={styles.cardDate}>
+                {daysAgo === 0
+                  ? "Today"
+                  : daysAgo === 1
+                    ? "1 day ago"
+                    : `${daysAgo} days ago`}
+              </Text>
+            </Pressable>
+          );
+        })}
       </View>
 
       <Pressable style={styles.addButton} onPress={() => router.push("/add")}>
