@@ -1,5 +1,6 @@
 import { Pressable, Text, View } from "react-native";
-import { styles } from "./index.styles";
+import { styles } from "../../styles/home.styles";
+import { router } from "expo-router";
 
 const items = [
   {
@@ -40,7 +41,7 @@ export default function HomeScreen() {
         ))}
       </View>
 
-      <Pressable style={styles.addButton}>
+      <Pressable style={styles.addButton} onPress={() => router.push("/add")}>
         <Text style={styles.addButtonText}>+</Text>
       </Pressable>
     </View>
