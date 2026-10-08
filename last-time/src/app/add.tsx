@@ -1,5 +1,5 @@
 import { Pressable, Text, TextInput, View } from "react-native";
-import { styles } from "./add.styles";
+import { styles } from "../../styles/add.styles";
 
 export default function AddScreen() {
   return (
