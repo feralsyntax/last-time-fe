@@ -45,6 +45,9 @@ export default function HomeScreen() {
                       ? "1 day ago"
                       : `${daysAgo} days ago`}
                 </Text>
+                <Text style={styles.actualDate}>
+                  Last recorded: {formatDate(item.lastDone)}
+                </Text>
               </View>
               <Pressable
                 style={styles.doneButton}
