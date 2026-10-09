@@ -12,7 +12,7 @@ function getDaysAgo(date: string) {
 }
 
 export default function HomeScreen() {
-  const { items } = useItems();
+  const { items, updateItem } = useItems();
 
   return (
     <View style={styles.container}>
@@ -27,8 +27,9 @@ export default function HomeScreen() {
         {items.map((item) => {
           const daysAgo = getDaysAgo(item.lastDone);
           return (
-            <Pressable key={item.id} style={styles.card}>
-              <Text style={styles.cardTitle}>{item.title}</Text>
+            <View key={item.id} style={styles.card}>
+              <View>
+                <Text style={styles.cardTitle}>{item.title}</Text>
               <Text style={styles.cardDate}>
                 {daysAgo === 0
                   ? "Today"
@@ -36,7 +37,12 @@ export default function HomeScreen() {
                     ? "1 day ago"
                     : `${daysAgo} days ago`}
               </Text>
-            </Pressable>
+              </View>
+              <Pressable style={styles.doneButton} onPress={() => updateItem(item.id)}>
+                <Text style={styles.doneButtonText}>Done</Text>
+              </Pressable>
+            </View>
+            
           );
         })}
       </View>
