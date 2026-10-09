@@ -67,4 +67,9 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
   },
+  actualDate: {
+    marginTop: 6,
+    fontSize: 13,
+    color: "#999999",
+  },
 });

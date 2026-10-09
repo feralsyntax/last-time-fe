@@ -11,6 +11,14 @@ function getDaysAgo(date: string) {
   return days;
 }
 
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
 export default function HomeScreen() {
   const { items, updateItem } = useItems();
 
@@ -30,19 +38,24 @@ export default function HomeScreen() {
             <View key={item.id} style={styles.card}>
               <View>
                 <Text style={styles.cardTitle}>{item.title}</Text>
-              <Text style={styles.cardDate}>
-                {daysAgo === 0
-                  ? "Today"
-                  : daysAgo === 1
-                    ? "1 day ago"
-                    : `${daysAgo} days ago`}
-              </Text>
+                <Text style={styles.cardDate}>
+                  {daysAgo === 0
+                    ? "Today"
+                    : daysAgo === 1
+                      ? "1 day ago"
+                      : `${daysAgo} days ago`}
+                </Text>
+                <Text style={styles.actualDate}>
+                  Last recorded: {formatDate(item.lastDone)}
+                </Text>
               </View>
-              <Pressable style={styles.doneButton} onPress={() => updateItem(item.id)}>
+              <Pressable
+                style={styles.doneButton}
+                onPress={() => updateItem(item.id)}
+              >
                 <Text style={styles.doneButtonText}>Done</Text>
               </Pressable>
             </View>
-            
           );
         })}
       </View>
