@@ -10,6 +10,7 @@ export type Item = {
 type ItemsContextType = {
     items: Item[];
     addItem: (title: string) => void;
+    updateItem: (id: string) => void;
 }
 
 const STORAGE_KEY = "@last-time/items";
@@ -42,8 +43,16 @@ export function ItemsProvider({children}: PropsWithChildren) {
         setItems((currentItems) => [newItem, ...currentItems]);
     }
 
+    function updateItem(id: string) {
+        setItems((currentItems) => 
+            currentItems.map((item) => 
+                item.id === id ? {...item, lastDone: new Date().toISOString()} : item
+            )
+        );
+    }
+
     return (
-        <ItemsContext.Provider value={{items, addItem}}>
+        <ItemsContext.Provider value={{items, addItem, updateItem}}>
             {children}
         </ItemsContext.Provider>
     )
