@@ -61,11 +61,18 @@ export default function AddScreen() {
       <View style={styles.dateOption}>
         <Pressable
           style={[
-            styles.dateOptionText,
-            dateMode === "today" && styles.dateOptionTextSelected,
+            styles.dateOption,
+            dateMode === "today" && styles.dateOptionSelected,
           ]}
         >
-          Today
+          <Text
+            style={[
+              styles.dateOptionText,
+              dateMode === "today" && styles.dateOptionTextSelected,
+            ]}
+          >
+            Today
+          </Text>
         </Pressable>
 
         <Pressable
