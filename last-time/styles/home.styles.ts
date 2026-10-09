@@ -55,4 +55,16 @@ export const styles = StyleSheet.create({
     fontWeight: "300",
     lineHeight: 34,
   },
+  doneButton: {
+    marginTop: 16,
+    backgroundColor: "#171717",
+    borderRadius: 10,
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  doneButtonText: {
+    color: "#FFFFFF",
+    fontSize: 14,
+    fontWeight: "600",
+  },
 });
