@@ -54,6 +54,58 @@ export default function AddScreen() {
         onChangeText={setTitle}
       />
 
+      <Text style={[styles.label, { marginTop: 24 }]}>
+        When did you do this?
+      </Text>
+
+      <View style={styles.dateOption}>
+        <Pressable
+          style={[
+            styles.dateOptionText,
+            dateMode === "today" && styles.dateOptionTextSelected,
+          ]}
+        >
+          Today
+        </Pressable>
+
+        <Pressable
+          style={[
+            styles.dateOption,
+            dateMode === "custom" && styles.dateOptionSelected,
+          ]}
+          onPress={() => setShowDatePicker(true)}
+        >
+          <Text
+            style={[
+              styles.dateOptionText,
+              dateMode === "custom" && styles.dateOptionTextSelected,
+            ]}
+          >
+            {dateMode === "custom"
+              ? selectedDate.toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "Choose date"}
+          </Text>
+        </Pressable>
+      </View>
+
+      {showDatePicker && (
+        <DateTimePicker
+          value={selectedDate}
+          mode='date'
+          maximumDate={new Date()}
+          display={Platform.OS === "ios" ? "spinner" : "default"}
+          onValueChange={(_, date) => {
+            setSelectedDate(date);
+            setDateMode("custom");
+          }}
+          onDismiss={() => setShowDatePicker(false)}
+        />
+      )}
+
       <Pressable style={styles.saveButton} onPress={handleSave}>
         <Text style={styles.saveButtonText}>Save</Text>
       </Pressable>
