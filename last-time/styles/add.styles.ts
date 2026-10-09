@@ -44,4 +44,35 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
+  dateOptions: {
+    flexDirection: "row",
+    gap: 12,
+  },
+
+  dateOption: {
+    flex: 1,
+    paddingVertical: 14,
+    paddingHorizontal: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#DDDDDD",
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  dateOptionSelected: {
+    backgroundColor: "#171717",
+    borderColor: "#171717",
+  },
+
+  dateOptionText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#171717",
+  },
+
+  dateOptionTextSelected: {
+    color: "#FFFFFF",
+  },
 });
